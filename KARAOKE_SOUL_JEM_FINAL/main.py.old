@@ -1,0 +1,106 @@
+import tkinter as tk
+import os
+import sys
+
+# ==========================================================
+# CONFIGURAZIONE AMBIENTE LINUX / AMD
+# ==========================================
+# Impedisce i warning di deprecazione su macOS/Linux per Tkinter
+os.environ['TK_SILENCE_DEPRECATION'] = '1'
+
+# Forza il backend X11 su Linux per garantire che MPV riesca a incorporarsi nei frame
+if sys.platform.startswith('linux'):
+    os.environ['GDK_BACKEND'] = 'x11' 
+
+# ==========================================================
+# IMPORTAZIONE MODULI (Percorsi ottimizzati per karaoke_b3)
+# ==========================================================
+try:
+    from karaoke_b3.core.player import KaraokePlayer
+    from karaoke_b3.core.bg_manager import BackgroundManager
+    from karaoke_b3.core.media_logic import MediaLogic 
+    from karaoke_b3.gui.main_window import MainWindow
+except ImportError:
+    # Fallback se il file viene lanciato dall'interno della cartella karaoke_b3
+    try:
+        from core.player import KaraokePlayer
+        from core.bg_manager import BackgroundManager
+        from core.media_logic import MediaLogic
+        from gui.main_window import MainWindow
+    except ImportError as e:
+        print(f"ERRORE CRITICO: Impossibile trovare i moduli del programma.\n{e}")
+        sys.exit(1)
+
+def main():
+    # Inizializzazione della finestra principale (Root)
+    root = tk.Tk()
+    root.title("KARAOKE CLEAN PROFESSIONAL")
+    root.configure(bg='#111') # Evita flash bianchi all'avvio
+
+    # Gestione finestra massimizzata
+    if sys.platform.startswith('linux'):
+        root.attributes('-zoomed', True)
+    else:
+        root.state('zoomed')
+
+    # ==========================================================
+    # INIZIALIZZAZIONE MOTORI LOGICI
+    # ==========================================================
+    
+    # 1. Gestione musica di sottofondo (Radio/MP3)
+    bg_music = BackgroundManager()
+    
+    # 2. Player Video/Karaoke (Doppia uscita)
+    player = KaraokePlayer()
+    
+    # 3. Logica Media (Download/Pitch/AMD VAAPI)
+    processor = MediaLogic(None) 
+    
+    # ==========================================================
+    # COSTRUZIONE INTERFACCIA GRAFICA
+    # ==========================================================
+    
+    # Inizializziamo la MainWindow passando i motori creati
+    app_gui = MainWindow(root, player, processor, bg_music)
+    
+    # --- CROSS-LINKING FONDAMENTALE ---
+    # Colleghiamo i motori alla GUI per permettere l'aggiornamento dei widget
+    processor.mw = app_gui
+    player.mw = app_gui
+
+    # Porta la finestra in primo piano
+    root.lift()
+
+    # ==========================================================
+    # LOGICA DI CHIUSURA PULITA
+    # ==========================================================
+    def on_closing():
+        """Spegne correttamente MPV e libera la memoria GPU"""
+        print("\n[SISTEMA] Chiusura di sicurezza in corso...")
+        try:
+            if bg_music: 
+                bg_music.stop()
+            
+            if player: 
+                player.cleanup()
+                
+            print("[SISTEMA] Risorse rilasciate. Arrivederci!")
+        except Exception as e:
+            print(f"[ERRORE] Durante la chiusura: {e}")
+        
+        # Distruzione GUI e uscita forzata per evitare thread appesi
+        root.quit()
+        root.destroy()
+        os._exit(0)
+
+    # Associa la chiusura della finestra alla nostra funzione
+    root.protocol("WM_DELETE_WINDOW", on_closing)
+    
+    # Gestione chiusura da terminale (CTRL+C)
+    try:
+        root.mainloop()
+    except KeyboardInterrupt:
+        on_closing()
+
+if __name__ == "__main__":
+    main()

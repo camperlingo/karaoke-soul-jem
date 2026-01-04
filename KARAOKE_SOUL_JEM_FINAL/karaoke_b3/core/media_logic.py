@@ -1,0 +1,312 @@
+import subprocess
+import os
+import uuid
+import threading
+import re
+import shutil
+import time
+import hashlib
+
+class MediaLogic:
+    """
+    Responsabile di:
+    - download URL (yt-dlp) con Smart Cache
+    - encoding con ffmpeg (Copia video + Pitch Audio Master-Safe)
+    - Interfaccia reale con il player MPV
+    - gestione stato sicura e pulizia automatica
+    """
+
+    def __init__(self, main_window):
+        self.mw = main_window
+        self.tmp_dir = os.path.expanduser("~/karaoke_clean/tmp")
+        os.makedirs(self.tmp_dir, exist_ok=True)
+        self._cleanup_tmp()
+
+    def _cleanup_tmp(self):
+        """
+        Pulisce SOLO i file più vecchi di 6 ore.
+        Mantiene i file recenti in caso di crash dell'app o riutilizzo diario.
+        """
+        print(f"[CACHE] Controllo file nella directory: {self.tmp_dir}")
+        
+        if not os.path.exists(self.tmp_dir):
+            os.makedirs(self.tmp_dir)
+            return
+
+        now = time.time()
+        # 6 ore * 3600 secondi/ora = 21600 secondi
+        cutoff = 6 * 3600 
+
+        for filename in os.listdir(self.tmp_dir):
+            file_path = os.path.join(self.tmp_dir, filename)
+            try:
+                if os.path.isfile(file_path) or os.path.islink(file_path):
+                    # Controlla l'ultima modifica del file
+                    file_age = now - os.path.getmtime(file_path)
+                    
+                    if file_age > cutoff:
+                        os.unlink(file_path)
+                        print(f"[CACHE] Eliminato file vecchio ({int(file_age/3600)}h): {filename}")
+                    else:
+                        print(f"[CACHE] Mantenuto file recente: {filename}")
+                        
+            except Exception as e:
+                print(f"[CACHE] Errore pulizia {filename}: {e}")
+
+    def _get_cache_id(self, source, pitch):
+        """Genera un ID deterministico basato sulla sorgente e il pitch per evitare ri-lavorazioni."""
+        raw_id = f"{source}_{pitch}"
+        return hashlib.md5(raw_id.encode()).hexdigest()[:12]
+
+    # ==========================================================
+    # LOGICA DI RIPRODUZIONE - CORRETTA E PROTETTA
+    # ==========================================================
+    def play_now_sync(self, path, auto_play=True):
+        """Il ponte tra la GUI e il Player MPV con protezione Ducking."""
+        try:
+            print(f"[DEBUG MEDIA] Caricamento file nel player: {path}")
+            self.mw._is_switching = True
+            
+            # Attivazione Ducking (abbassa la radio/musica di sottofondo)
+            if hasattr(self.mw, "bg_manager") and self.mw.bg_manager:
+                self.mw.bg_manager.set_ducking(True)
+            
+            self.mw.player.load_media(
+                path, 
+                pitch=0, 
+                start_paused=(not auto_play),
+                is_radio=False
+            )
+            
+            if self.mw.lbl_status:
+                self.mw.lbl_status.config(text="LIVE: IN RIPRODUZIONE", fg="lightgreen")
+            
+            # --- FIX IMPORTANTE: Delay per evitare sovrapposizioni Radio ---
+            self.mw.root.after(3000, self._release_shield)
+        except Exception as e:
+            print(f"[DEBUG MEDIA] Errore critico riproduzione: {e}")
+            self.mw._is_switching = False
+
+    def _release_shield(self):
+        """Metodo helper per sbloccare i segnali di stop"""
+        self.mw._is_switching = False
+        print("[DEBUG MEDIA] Scudo rimosso, monitoraggio stop riattivato.")
+
+    # ==========================================================
+    # ENTRY POINT PROCESSING (AMD VAAPI OPTIMIZED)
+    # ==========================================================
+    def start_direct_process(self, source, pitch, index=None):
+        """Avvia il thread di elaborazione (download/encoding) per un brano."""
+        if index is None: return
+        item = self.mw.playlist_data[index]
+
+        # PROTEZIONE MASTER: Salviamo la sorgente originale per evitare pitch-su-pitch
+        # Se cambiamo il pitch a un brano già nel diario, useremo sempre la sorgente pulita.
+        if "original_source" not in item:
+            item["original_source"] = source
+
+        item["progress"] = 0
+        item["phase"] = "CHECKING"
+        item["_stop"] = False
+        item.pop("_proc", None)
+        self.mw.refresh_tree()
+
+        t = threading.Thread(
+            target=self._worker,
+            args=(item, pitch),
+            daemon=True
+        )
+        t.start()
+
+    def _worker(self, item, pitch):
+        """Thread worker che gestisce la logica di cache e processing."""
+        try:
+            # Usiamo sempre la sorgente originale (Master) per l'elaborazione
+            source = item["original_source"]
+
+            # 1. GENERAZIONE ID CACHE UNIVERSALE
+            cache_id = self._get_cache_id(source, pitch)
+            cached_file = os.path.join(self.tmp_dir, f"cache_{cache_id}.mp4")
+
+            # 2. CONTROLLO CACHE (Se esiste già, carichiamo istantaneamente)
+            if os.path.exists(cached_file):
+                print(f"[CACHE] Ripescaggio file pronto: {cache_id}")
+                item["path"] = cached_file
+                item["phase"] = "DONE"
+                item["progress"] = 100
+                self.mw.root.after(0, self.mw.refresh_tree)
+                return
+
+            # 3. RISOLUZIONE SORGENTE (Download se necessario)
+            item["phase"] = "PREPARING"
+            original = self._resolve_source(item, source)
+            
+            if not source.startswith("http"):
+                if not original or not os.path.exists(original):
+                    raise RuntimeError(f"Sorgente locale non trovata: {source}")
+
+            if item.get("_stop"): return
+
+            # 4. CONTROLLO NECESSITÀ ENCODING
+            is_mkv = original.lower().endswith(".mkv")
+            needs_conversion = int(pitch) != 0 or is_mkv
+
+            if not needs_conversion:
+                item["path"] = original
+                item["phase"] = "DONE"
+                item["progress"] = 100
+                self.mw.root.after(0, self.mw.refresh_tree)
+                return
+
+            # 5. CASO ENCODING PITCH / CONVERSIONE
+            item["phase"] = "ENCODING"
+            item["progress"] = 0
+            self.mw.root.after(0, self.mw.refresh_tree)
+
+            # Encoding veloce: Copia Video + Pitch Audio Master-Safe
+            out = self._encode_with_progress(original, pitch, cached_file, item)
+
+            if item.get("_stop"): return
+            if not out or not os.path.exists(out):
+                raise RuntimeError("Encoding fallito")
+
+            item["path"] = out
+            item["phase"] = "DONE"
+            item["progress"] = 100
+        except Exception as e:
+            print(f"[PROCESSOR ERROR] {e}")
+            item["phase"] = "ERROR"
+            item["progress"] = 0
+        finally:
+            item.pop("_proc", None)
+            self.mw.root.after(0, self.mw.refresh_tree)
+
+    def stop_processing(self, item):
+        """Interrompe il processo di download o encoding corrente."""
+        item["_stop"] = True
+        proc = item.get("_proc")
+        if proc:
+            try:
+                proc.terminate()
+                proc.wait(timeout=1)
+            except:
+                try: proc.kill()
+                except: pass
+        item["phase"] = "PAUSED"
+        item["progress"] = 0
+        item.pop("_proc", None)
+
+    # ==========================================================
+    # INTERNI: DOWNLOAD & ENCODE (SMART PERSISTENCE)
+    # ==========================================================
+    def _resolve_source(self, item, source):
+        """Gestisce il recupero della sorgente originale o il download."""
+        if source.startswith("http"):
+            # Generiamo un ID basato sulla URL per la persistenza del download Master
+            url_hash = hashlib.md5(source.encode()).hexdigest()[:12]
+            dl_path = os.path.join(self.tmp_dir, f"dl_{url_hash}.mp4")
+
+            # Se il file scaricato esiste già, lo riutilizziamo come Master
+            if os.path.exists(dl_path):
+                print(f"[CACHE] Download già presente per URL: {url_hash}")
+                return dl_path
+
+            item["phase"] = "DOWNLOAD"
+            self.mw.root.after(0, self.mw.refresh_tree)
+            path = self._download_with_progress(source, dl_path, item)
+            
+            if path and os.path.exists(path):
+                return path
+            else:
+                raise RuntimeError("Download fallito o interrotto")
+        return source if os.path.exists(source) else None
+
+    def _download_with_progress(self, url, out_path, item):
+        """Esegue yt-dlp e cattura il progresso per la GUI."""
+        cmd = [
+            "yt-dlp", "-f", "bestvideo[height<=720]+bestaudio/best",
+            "--merge-output-format", "mp4", "--newline",
+            "-o", out_path, url
+        ]
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        item["_proc"] = proc
+        final_path = None
+        rx = re.compile(r"\[download\]\s+(\d+(?:\.\d+)?)%")
+        
+        for line in proc.stdout:
+            if item.get("_stop"): return None
+            m = rx.search(line)
+            if m: 
+                item["progress"] = int(float(m.group(1)))
+                self.mw.root.after(0, self.mw.refresh_tree)
+            if "Destination:" in line:
+                final_path = line.split("Destination:", 1)[1].strip()
+        
+        proc.wait()
+        
+        # Se yt-dlp non ha comunicato il percorso, lo verifichiamo fisicamente
+        if not final_path or not os.path.exists(final_path):
+             if os.path.exists(out_path):
+                 final_path = out_path
+        
+        return final_path
+
+    def _encode_with_progress(self, src, pitch, out_path, item):
+        """Encoding ottimizzato: Copia Video (-c:v copy) e ricodifica solo Audio."""
+        pitch_factor = 2 ** (float(pitch) / 12.0)
+        
+        cmd = [
+            "ffmpeg", "-y",
+            "-i", src,
+            "-af", f"asetrate=44100*{pitch_factor},atempo={1/pitch_factor},aresample=44100",
+            "-c:v", "copy",  # <--- COPIA IL VIDEO SENZA TOCCARLO (ISTANTANEO)
+            "-c:a", "aac", "-b:a", "192k", 
+            "-map", "0:v:0", "-map", "0:a:0", # Forza la selezione della prima traccia
+            "-movflags", "+faststart",
+            "-progress", "pipe:1", "-nostats", out_path
+        ]
+        
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
+        item["_proc"] = proc
+        duration = self._get_duration(src)
+        
+        for line in proc.stdout:
+            if item.get("_stop"): return None
+            if line.startswith("out_time_ms=") and duration > 0:
+                try:
+                    ms = int(line.split("=")[1])
+                    sec = ms / 1_000_000
+                    item["progress"] = min(99, int((sec / duration) * 100))
+                    self.mw.root.after(0, self.mw.refresh_tree)
+                except: pass
+        
+        proc.wait()
+        return out_path if os.path.exists(out_path) else None
+
+    def _get_duration(self, path):
+        """Ottiene la durata del file tramite ffprobe."""
+        try:
+            out = subprocess.check_output(
+                ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                 "-of", "default=noprint_wrappers=1:nokey=1", path],
+                text=True
+            )
+            return float(out.strip())
+        except: return 0.0
+
+    def save_current_to_local(self, index):
+        """Salvataggio manuale dalla playlist (non dal diario) all'archivio locale."""
+        if index >= len(self.mw.playlist_data): return
+        item = self.mw.playlist_data[index]
+        if not item.get("path"): return
+        
+        # Cartella di default per l'archivio rapido
+        save_dir = os.path.expanduser("~/karaoke_clean/Basi_karaoke")
+        os.makedirs(save_dir, exist_ok=True)
+        
+        dest = os.path.join(save_dir, f"{item['song']} ({item['pitch']:+}).mp4")
+        try:
+            shutil.copy2(item["path"], dest)
+            print(f"[DEBUG MEDIA] Salvataggio rapido completato: {dest}")
+        except Exception as e:
+            print(f"[DEBUG MEDIA] Errore salvataggio: {e}")
