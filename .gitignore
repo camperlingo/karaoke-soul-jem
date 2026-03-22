@@ -1,0 +1,9 @@
+venv/
+build/
+dist/
+tmp/
+Basi_karaoke/
+MP3_DOWNLOADS/
+*.deb
+*.pyc
+__pycache__/

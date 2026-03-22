@@ -1,0 +1,2 @@
+[console_scripts]
+karaoke-b3 = karaoke_b3.main:main

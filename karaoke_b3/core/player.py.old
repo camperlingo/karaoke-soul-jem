@@ -1,0 +1,224 @@
+import mpv
+import os
+import atexit
+import subprocess
+import threading
+import time
+from .visualizer_logic import Visualizer 
+
+class KaraokePlayer:
+    def __init__(self, main_window=None):
+        self.mw = main_window 
+        self.black_file = os.path.expanduser("~/karaoke_clean/assets/black.mp4")
+        self.main_wid = None
+        self.sync_active = True
+        self.viz_manager = Visualizer()
+        
+        # --- FLAGS DI SICUREZZA ---
+        self._is_loading = False 
+        self._is_switching = False
+        self._safe_to_sync = False 
+
+        # --- PARAMETRI SUPER-LEGGERI (ANTI-LAG) ---
+        self.params = {
+            "vo": "gpu",
+            "hwdec": "vaapi",
+            "hwdec-codecs": "h264,vc1,wmv3,hevc", 
+            "profile": "fast",                 # Disattiva post-processing pesante
+            "vd-lavc-fast": "yes",             # Decodifica rapida per CPU deboli
+            "vd-lavc-skiploopfilter": "all",   # Ignora calcoli extra sui frame H264
+            "keep_open": "yes",
+            "idle": "yes",
+            "osc": False,
+            "audio_pitch_correction": "yes",
+            "audio-display": "no", 
+            "video_sync": "audio", 
+            "cache": "yes",
+            "demuxer-max-bytes": "150M",
+            "audio-buffer": "1.0",           
+            "audio-stream-silence": "yes",
+            "gpu-context": "x11egl",
+            "vd-lavc-dr": "yes",
+            "opengl-pbo": "yes",
+            "input_default_bindings": "no",
+            "input_vo_keyboard": "no",
+            "reset_on_next_file": "all"
+        }
+        
+        try:
+            self.player = mpv.MPV(**self.params, force_window="no")
+            
+            @self.player.event_callback('end-file')
+            def on_end_file(event):
+                if not self.sync_active or not self.mw or self._is_loading or self._is_switching: 
+                    return
+                if hasattr(self.mw, 'bg_manager') and self.mw.bg_manager.is_playing:
+                    self.mw.root.after(200, self.mw.bg_manager.next)
+
+            self.sala_player = mpv.MPV(**self.params, title="SALA_KARAOKE", volume=0, force_window="yes")
+            
+            try:
+                self.sala_player.window_minimized = "yes"
+            except: pass
+
+            threading.Thread(target=self._continuous_sync, daemon=True).start()
+        except Exception as e:
+            print(f"ERRORE CRITICO: {e}")
+
+        atexit.register(self.cleanup)
+
+    def load_media(self, path, pitch=0, start_paused=True, is_radio=False):
+        if not path or self._is_loading: return
+        
+        self._safe_to_sync = False 
+        
+        if not is_radio:
+            self._is_switching = True
+            threading.Timer(3.0, self._reset_switching).start()
+
+        self._is_loading = True 
+        opts = self.viz_manager.get_options(path, is_radio=is_radio)
+        
+        try:
+            was_minimized = "yes"
+            if hasattr(self, 'sala_player'):
+                was_minimized = getattr(self.sala_player, 'window_minimized', "yes")
+            
+            if hasattr(self, 'player'):
+                self.player.command("loadfile", path, "replace", opts)
+            
+            if hasattr(self, 'sala_player'):
+                self.sala_player.command("loadfile", path, "replace", opts)
+                time.sleep(0.3)
+                if was_minimized != "yes":
+                    self.sala_player.window_minimized = "no"
+
+            if hasattr(self, 'player'):
+                self.player.volume = 100 if not is_radio else self.mw.bg_manager.base_volume
+                self.player.mute = False
+                self.player.pause = start_paused
+            
+            if hasattr(self, 'sala_player'):
+                self.sala_player.volume = 0
+                self.sala_player.mute = True
+                self.sala_player.pause = start_paused
+            
+            self.set_pitch(pitch)
+            
+        except Exception as e:
+            print(f"[PLAYER] Errore caricamento: {e}")
+        finally:
+            self._is_loading = False 
+            self._safe_to_sync = True 
+
+    def _reset_switching(self):
+        self._is_switching = False
+
+    def stop(self):
+        if self._is_loading: return
+        self._safe_to_sync = False 
+        try:
+            if hasattr(self, 'player'): self.player.command("stop")
+            if hasattr(self, 'sala_player'): self.sala_player.command("stop")
+            if self._is_switching: return
+            time.sleep(0.1) 
+            if self.mw and hasattr(self.mw, 'bg_manager') and self.mw.bg_manager.is_playing:
+                self.mw.bg_manager.next()
+                return
+            if os.path.exists(self.black_file):
+                self.load_media(self.black_file, start_paused=True)
+                if hasattr(self, 'player'): self.player.volume = 0
+        except: pass
+
+    def toggle_sala(self):
+        if not hasattr(self, 'sala_player'): return
+        try:
+            current = self.sala_player.window_minimized
+            if current == "yes":
+                self.sala_player.window_minimized = "no"
+                if self._get_connected_monitors() > 1:
+                    self.sala_player.fullscreen = "yes"
+                    self.sala_player.geometry = "+1920+0"
+                else:
+                    self.sala_player.fullscreen = "no"
+                    self.sala_player.geometry = "480x270+50+50"
+                    self.sala_player.ontop = "yes"
+            else:
+                self.sala_player.window_minimized = "yes"
+        except: pass
+
+    def _continuous_sync(self):
+        while self.sync_active:
+            if self._safe_to_sync:
+                try:
+                    if hasattr(self, 'player') and hasattr(self, 'sala_player'):
+                        if not getattr(self.player, 'idle_active', True) and not getattr(self.player, 'pause', True):
+                            p_pos = self.player.time_pos
+                            s_pos = self.sala_player.time_pos
+                            
+                            # TOLLERANZA A 0.8s: Permette circa mezzo secondo di anticipo 
+                            # ma forza la Sala a riallinearsi se scappa troppo in avanti
+                            if p_pos is not None and s_pos is not None and abs(p_pos - s_pos) > 0.8:
+                                self.sala_player.time_pos = p_pos
+                except: pass
+            
+            # Controllo più frequente: ogni mezzo secondo invece di 1 intero
+            time.sleep(0.5) 
+
+    def set_window(self, wid):
+        try:
+            self.main_wid = str(wid)
+            if hasattr(self, 'player'): self.player.wid = self.main_wid
+        except: pass
+
+    def toggle_pause(self, force_play=None):
+        try:
+            if not hasattr(self, 'player') or getattr(self.player, 'idle_active', True): return True
+            st = not force_play if force_play is not None else not self.player.pause
+            self.player.pause = st
+            if hasattr(self, 'sala_player'): self.sala_player.pause = st
+            return st
+        except: return False
+
+    def seek(self, percent):
+        try:
+            if hasattr(self, 'player'): self.player.percent_pos = float(percent)
+            if hasattr(self, 'sala_player'): self.sala_player.percent_pos = float(percent)
+        except: pass
+
+    def set_pitch(self, val):
+        try:
+            speed = 2**(float(val)/12.0)
+            if hasattr(self, 'player'): self.player.speed = speed
+            if hasattr(self, 'sala_player'): self.sala_player.speed = speed
+        except: pass
+
+    def set_volume(self, val):
+        try: 
+            if hasattr(self, 'player'): self.player.volume = float(val)
+        except: pass
+
+    def _get_connected_monitors(self):
+        try:
+            out = subprocess.check_output("xrandr | grep ' connected' | wc -l", shell=True)
+            return int(out.decode().strip())
+        except: return 1
+
+    def cleanup(self):
+        self.sync_active = False 
+        self._safe_to_sync = False
+        time.sleep(0.1)          
+        
+        if hasattr(self, 'sala_player'):
+            try:
+                self.sala_player.command("quit")
+                self.sala_player.terminate() 
+            except: pass
+            
+        if hasattr(self, 'player'):
+            try:
+                self.player.command("quit")
+                self.player.terminate()      
+            except: pass
+
+Player = KaraokePlayer

@@ -1,0 +1,20 @@
+Metadata-Version: 2.4
+Name: karaoke_b3
+Version: 1.0.0
+Summary: Un'applicazione karaoke basata su GTK3 e MPV
+Home-page: https://github.com/tuoutente/karaoke_b3
+Author: Il Tuo Nome
+Author-email: tua@email.com
+License: GPL-3.0
+Keywords: karaoke gtk3 mpv
+Requires-Python: >=3.6
+Requires-Dist: python-mpv>=1.0.0
+Requires-Dist: PyGObject>=3.36.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary

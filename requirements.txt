@@ -1,0 +1,5 @@
+pygame
+Pillow
+websockets
+python-mpv>=1.0.1
+yt-dlp>=2023.0.0

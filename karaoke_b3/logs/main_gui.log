@@ -1,0 +1,42 @@
+2025-12-04 15:39:50 [INFO] Avvio MainGUI...
+/home/laura/karaoke_b3/main_gui.py:48: DeprecationWarning: Gtk.Widget.set_margin_left is deprecated
+  vbox.set_margin_left(6)
+/home/laura/karaoke_b3/main_gui.py:49: DeprecationWarning: Gtk.Widget.set_margin_right is deprecated
+  vbox.set_margin_right(6)
+/home/laura/karaoke_b3/main_gui.py:95: PyGTKDeprecationWarning: Using positional arguments with the GObject constructor has been deprecated. Please specify keyword(s) for "value, lower, upper, step_increment, page_increment, page_size" or use a class specific constructor. See: https://wiki.gnome.org/PyGObject/InitializerDeprecations
+  vol_adj = Gtk.Adjustment(50, 0, 100, 1, 5, 0)
+2025-12-04 15:39:50 [INFO] Avviato mpv (idle) pid=10008 socket=/tmp/mpv_main.sock
+2025-12-04 15:39:50 [DEBUG] Socket mpv trovata.
+2025-12-04 15:39:50 [INFO] MainGUI avviata
+2025-12-04 15:39:50 [INFO] Avviato mpv embedded pid=10009 wid=54525963 socket=/tmp/mpv_preview.sock
+2025-12-04 15:39:50 [DEBUG] Socket mpv (embedded) trovata.
+Traceback (most recent call last):
+  File "/home/laura/karaoke_b3/gui/video_viewer.py", line 49, in on_draw
+    layout.show_in_cairo_context(cr)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Layout' object has no attribute 'show_in_cairo_context'
+Traceback (most recent call last):
+  File "/home/laura/karaoke_b3/gui/video_viewer.py", line 49, in on_draw
+    layout.show_in_cairo_context(cr)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Layout' object has no attribute 'show_in_cairo_context'
+Traceback (most recent call last):
+  File "/home/laura/karaoke_b3/gui/video_viewer.py", line 49, in on_draw
+    layout.show_in_cairo_context(cr)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Layout' object has no attribute 'show_in_cairo_context'
+Traceback (most recent call last):
+  File "/home/laura/karaoke_b3/gui/video_viewer.py", line 49, in on_draw
+    layout.show_in_cairo_context(cr)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Layout' object has no attribute 'show_in_cairo_context'
+Traceback (most recent call last):
+  File "/home/laura/karaoke_b3/gui/video_viewer.py", line 49, in on_draw
+    layout.show_in_cairo_context(cr)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Layout' object has no attribute 'show_in_cairo_context'
+Traceback (most recent call last):
+  File "/home/laura/karaoke_b3/gui/video_viewer.py", line 49, in on_draw
+    layout.show_in_cairo_context(cr)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Layout' object has no attribute 'show_in_cairo_context'

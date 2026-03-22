@@ -1,0 +1,722 @@
+import os
+import tkinter as tk
+from tkinter import filedialog
+import json
+import time
+import sys
+import subprocess
+
+# Import dei componenti dell'architettura interna
+from .ui_layout import UILayout
+from .playlist_view import PlaylistView
+from .actions import WindowActions
+from .playlist_logic import PlaylistLogic
+from karaoke_b3.core.media_logic import MediaLogic
+from .scanner import LocalScanner
+from .playlist_manager import PlaylistManager
+from karaoke_b3.core.config import Config # Aggiunto import del Config per poter salvare le scelte
+
+from karaoke_b3.core.mirror_controller import MirrorController
+
+# --- CLASSE TOOLTIP (Per i suggerimenti al passaggio del mouse) ---
+class ToolTip(object):
+    def __init__(self, widget, text='widget info'):
+        self.waittime = 500     # millisecondi di attesa
+        self.wraplength = 180   # larghezza testo
+        self.widget = widget
+        self.text = text
+        self.widget.bind("<Enter>", self.enter)
+        self.widget.bind("<Leave>", self.leave)
+        self.widget.bind("<ButtonPress>", self.leave)
+        self.id = None
+        self.tw = None
+
+    def enter(self, event=None):
+        self.schedule()
+
+    def leave(self, event=None):
+        self.unschedule()
+        self.hidetip()
+
+    def schedule(self):
+        self.unschedule()
+        self.id = self.widget.after(self.waittime, self.showtip)
+
+    def unschedule(self):
+        id = self.id
+        self.id = None
+        if id:
+            self.widget.after_cancel(id)
+
+    def showtip(self, event=None):
+        x = y = 0
+        x, y, cx, cy = self.widget.bbox("insert")
+        x += self.widget.winfo_rootx() + 25
+        y += self.widget.winfo_rooty() + 20
+        self.tw = tk.Toplevel(self.widget)
+        self.tw.wm_overrideredirect(True)
+        self.tw.wm_geometry("+%d+%d" % (x, y))
+        label = tk.Label(self.tw, text=self.text, justify='left',
+                       background="#ffffe0", relief='solid', borderwidth=1,
+                       wraplength = self.wraplength)
+        label.pack(ipadx=1)
+
+    def hidetip(self):
+        tw = self.tw
+        self.tw= None
+        if tw:
+            tw.destroy()
+
+class MainWindow:
+    def __init__(self, root, player, processor, bg_manager):
+        self.root = root
+        self.player = player
+        
+        # --- PATCH CORE: Integrazione MediaLogic per Hardware AMD Radeon R2 ---
+        self.media_logic = MediaLogic(self)
+        self.processor = self.media_logic 
+        self.bg_manager = bg_manager
+        
+        # Inizializza Config per l'accesso e salvataggio delle variabili globali
+        self.config = Config()
+        
+        # --- COLLEGAMENTO BIDIREZIONALE ---
+        self.player.mw = self
+        self.bg_manager.mw = self 
+
+        # --- STATI E VARIABILI DI CONTROLLO ---
+        self.playlist_data = []
+        self.play_history = []  
+        self.is_dragging = False
+        self.sala_active = False 
+        self._is_switching = False
+        self.smtube_proc = None  
+        self.smtube_visible = False  
+
+        self.root.title("KARAOKE CLEAN PROFESSIONAL SYSTEM")
+        self.root.configure(bg="#121212")
+
+        # --- GESTIONE CHIUSURA ATOMICA ---
+        self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
+
+        # Inizializzazione Logiche e Controller Esterni
+        self.pl_logic = PlaylistLogic(self)
+        self.actions = WindowActions(self)
+        self.mirror = MirrorController()
+
+        # Costruzione dell'Interfaccia Grafica
+        self.ui = UILayout(self.root)
+        self.ui.build()
+
+        self.playlist_view = PlaylistView(self.ui.col_right, self)
+        
+        self.tree = self.playlist_view.tree
+        self.lsb_files = self.ui.lsb_files
+        self.lbl_status = self.ui.lbl_status
+
+        # Binding degli eventi UI
+        self._bind_events()
+
+        # Scanner locale e Manager della Playlist
+        self.scanner = LocalScanner(self.lsb_files, self.lbl_status)
+        self.pl_manager = PlaylistManager(self.tree, self.playlist_data, self.refresh_tree)
+
+        # Ripristino sessione e inizializzazione ritardata MPV
+        self._load_session()
+        self.root.after(800, self._safe_init_mpv)
+
+    def on_closing(self):
+        """Chiusura totale Soul Jem e SMTube."""
+        print("\n[SISTEMA] Spegnimento totale in corso...")
+        import subprocess
+        import os
+        try:
+            self._save_session()
+            
+            # 1. Tentativo di chiusura garbata del processo salvato
+            if self.smtube_proc:
+                self.smtube_proc.terminate()
+            
+            # 2. Kill forzato di SMTube e dei suoi sottoprocessi (es. il browser/cookie jar)
+            # Usiamo pkill in modo più granulare
+            subprocess.run(["pkill", "-f", "smtube"], check=False)
+            
+            # 3. Pulizia Player MPV
+            if hasattr(self, 'player'):
+                self.player.cleanup()
+                
+            print("[SISTEMA] Risorse liberate correttamente.")
+            self.root.destroy()
+        except Exception as e:
+            print(f"[ERRORE CHIUSURA] {e}")
+            self.root.destroy()
+        finally:
+            os._exit(0)
+
+    def on_stop_click(self):
+        """Interrompe la riproduzione e ripristina lo stato della radio"""
+        if self._is_switching: return
+        print("[SISTEMA] Stop richiesto dall'utente.")
+        try:
+            self.player.stop()
+            self.root.after(300, self._finalize_stop) 
+        except Exception as e:
+            print(f"[ERRORE] Fallimento durante lo stop: {e}")
+
+    def _finalize_stop(self):
+        """Ripristina i widget e il ducking audio dopo lo stop"""
+        if self._is_switching: return
+        
+        if hasattr(self, 'bg_manager'):
+            self.bg_manager.set_ducking(False, force=True)
+            
+        self.ui.slider_var.set(0)
+        self.lbl_status.config(text="SISTEMA PRONTO", fg="cyan")
+        self.refresh_tree()
+
+    def _update_progress_loop(self):
+        """
+        Loop di monitoraggio IMMORTALE.
+        Gestisce la barra, la fine del brano e garantisce che il ciclo non muoia mai.
+        """
+        try:
+            # 1. Se stiamo cambiando traccia, saltiamo il controllo ma NON uccidiamo il loop
+            if self._is_switching:
+                return
+
+            # 2. Aggiornamento Barra e Controllo Fine Brano
+            if not self.is_dragging and self.player.player:
+                try:
+                    pos = self.player.player.percent_pos
+                    time_pos = self.player.player.time_pos
+                    duration = self.player.player.duration
+                    
+                    if pos is not None and duration is not None and duration > 0:
+                        self.ui.slider_var.set(pos)
+                        
+                        # LOGICA FINE BRANO
+                        remaining = duration - (time_pos if time_pos else 0)
+                        if pos > 99.5 and remaining < 2.0: 
+                            print("[SISTEMA] Fine brano rilevata (soglia temporale).")
+                            self.on_stop_click()
+                            return 
+                except:
+                    # Se MPV non risponde momentaneamente, ignoriamo
+                    pass
+
+            # 3. Aggiornamento Barre Download (Protetto)
+            self.update_progress_bars()
+
+        except Exception as e:
+            print(f"[LOOP ERROR] Errore nel ciclo di progresso: {e}")
+        finally:
+            # 4. RICHIAMO RICORSIVO GARANTITO (Loop Immortale)
+            # Qualsiasi cosa succeda sopra, tra 200ms ci riproviamo.
+            self.root.after(200, self._update_progress_loop)
+
+    def update_progress_bars(self):
+        """Aggiorna le barre di caricamento globali (Download/Encoding)"""
+        main_val = 0
+        needs_processing = False
+        
+        # FIX: Iteriamo su una COPIA della lista per evitare crash se cambia dimensione
+        # durante il download/encoding (RuntimeError: dictionary changed size)
+        for d in list(self.playlist_data): 
+            phase = d.get("phase")
+            if phase in ("DOWNLOAD", "ENCODING"):
+                main_val = max(main_val, int(d.get("progress", 0)))
+            if phase == "WAITING": 
+                needs_processing = True
+        
+        try:
+            self.ui.prog_main["value"] = main_val
+        except:
+            pass
+
+        if main_val == 0 and needs_processing: 
+            self._trigger_next_in_queue()
+
+    def _trigger_next_in_queue(self):
+        for i, item in enumerate(self.playlist_data):
+            if item.get("phase") == "WAITING":
+                print(f"[CODA] Avvio processamento per: {item['song']}")
+                self.media_logic.start_direct_process(item["source"], item["pitch"], index=i)
+                break
+
+    def on_process_finished(self, item):
+        self._save_session()
+        self.refresh_tree()
+
+    def refresh_tree(self):
+        children = self.tree.get_children()
+        
+        for i, d in enumerate(self.playlist_data):
+            ph = d.get("phase", "IDLE")
+            st, col = "⏳ ATTESA", "#b0bec5"
+            if ph == "PAUSED": st, col = "⏸ PAUSA", "#fdd835"
+            elif ph in ("DOWNLOAD", "ENCODING"): st, col = f"▶ RUN {d.get('progress', 0)}%", "#4fc3f7"
+            elif ph == "PLAYING": st, col = "▶ IN ONDA", "#81c784"
+            elif ph == "DONE": st, col = "✅ PRONTA", "#a5d6a7"
+            elif ph == "ERROR": st, col = "❌ ERRORE", "#e57373"
+            
+            vals = (d["name"], d["song"], f"{d['pitch']:+}", st)
+
+            if i < len(children):
+                iid = children[i]
+                self.tree.item(iid, values=vals)
+            else:
+                iid = self.tree.insert("", tk.END, values=vals)
+            
+            self.tree.tag_configure(f"col_{ph}", background=col, foreground="black")
+            self.tree.item(iid, tags=(f"col_{ph}",))
+
+        if len(children) > len(self.playlist_data):
+            for j in range(len(self.playlist_data), len(children)):
+                self.tree.delete(children[j])
+                
+        self._save_session()
+
+    def _bind_events(self):
+        """Collega i widget grafici alle azioni logiche e aggiunge i Tooltips"""
+        self.ui.lsb_files.bind("<Double-Button-1>", self.handle_archive_click_debug)
+        self.ui.btn_change_folder.config(command=self.actions.change_folder)
+        ToolTip(self.ui.btn_change_folder, "Cambia la cartella principale delle Basi Karaoke")
+
+        self.ui.ent_search.bind("<KeyRelease>", lambda e: self.scanner.update_list(self.ui.ent_search.get()))
+        
+        if hasattr(self.ui, 'btn_refresh'):
+            self.ui.btn_refresh.config(command=self.force_refresh_archive)
+            ToolTip(self.ui.btn_refresh, "Ricarica la lista dei file dal disco")
+
+        self.ui.btn_toggle_archive.config(command=self.toggle_archive)
+        self.ui.btn_toggle_playlist.config(command=self.toggle_playlist)
+        
+        # --- RADIO: Tasto SX (File) / Tasto DX (Cartella) ---
+        self.ui.btn_browse_bg.config(command=self._browse_single_file)
+        self.ui.btn_browse_bg.bind("<Button-3>", self._browse_bg_folder) # <--- TASTO DESTRO
+        ToolTip(self.ui.btn_browse_bg, "Tasto SX: Scegli un singolo brano\nTasto DX: Scegli intera cartella")
+        
+        self.ui.btn_radio_play.config(command=self._quick_load_bg)
+        self.ui.btn_radio_play.bind("<Button-3>", self.force_load_bg_folder)
+        ToolTip(self.ui.btn_radio_play, "Tasto SX: Riproduci | Tasto DX: Forza Nuova Cartella")
+
+        self.ui.btn_radio_toggle.config(command=self.bg_manager.toggle)
+        self.ui.vol_bg.config(command=self.bg_manager.set_volume)
+
+        # --- Binding per Visualizer e Immagine Radio ---
+        self.ui.btn_viz_toggle.config(command=self.toggle_visualizer)
+        self.ui.btn_viz_toggle.bind("<Button-3>", self.load_viz_video_folder) # <--- TASTO DESTRO AGGIUNTO
+        ToolTip(self.ui.btn_viz_toggle, "Tasto SX: On/Off | Tasto DX: Carica video loop")
+
+        self.ui.btn_radio_img.config(command=self.load_radio_image)
+        ToolTip(self.ui.btn_radio_img, "Seleziona un'immagine statica per il background radio")
+        
+        # Controlli Player Principale
+        self.ui.btn_play_pause.config(command=self.player.toggle_pause)
+        self.ui.btn_stop.config(command=self.on_stop_click)
+        self.ui.btn_sala.config(command=self.toggle_sala)
+        ToolTip(self.ui.btn_sala, "Attiva/Disattiva lo schermo per il pubblico (Monitor 2)")
+
+        self.ui.btn_mirror.config(text="YOUTUBE", bg="#444", command=self.toggle_youtube_browser) 
+        ToolTip(self.ui.btn_mirror, "Apri o nascondi la ricerca YouTube")
+        
+        # --- COLLEGAMENTO TASTO INTELLIGENTE LOAD/BROWSE ---
+        if hasattr(self.ui, 'btn_quick_load'):
+            self.ui.btn_quick_load.config(command=self._smart_load_browse)
+            ToolTip(self.ui.btn_quick_load, "Vuoto: Sfoglia File | Pieno: Conferma e Pitch")
+
+        # --- MODIFICA: Seleziona tutto il testo quando clicchi nella barra ---
+        if hasattr(self.ui, 'ent_quick_url'):
+            def select_all(event):
+                # Seleziona tutto il testo e posiziona il cursore alla fine
+                event.widget.select_range(0, 'end')
+                event.widget.icursor('end')
+                return 'break' # Ferma altri eventi che potrebbero deselezionare
+            
+            # Attiva la selezione totale sia col click sinistro che col tasto tab (FocusIn)
+            self.ui.ent_quick_url.bind("<FocusIn>", select_all)
+            # Aggiungiamo anche Ctrl+A per sicurezza
+            self.ui.ent_quick_url.bind("<Control-a>", lambda e: select_all(e))
+        # --------------------------------------------------------------------
+
+        def _set_main_vol(v):
+            try: self.player.player.volume = int(float(v))
+            except: pass
+        self.ui.vol_main.config(command=_set_main_vol)
+        
+        self.ui.slider.bind("<ButtonPress-1>", lambda e: setattr(self, "is_dragging", True))
+        self.ui.slider.bind("<ButtonRelease-1>", self._stop_drag)
+
+        pv = self.playlist_view
+        pv.tree.bind("<Double-Button-1>", self.actions.handle_playlist_double_click)
+        pv.btn_add.config(command=self.actions.handle_load_button)
+        pv.btn_play.config(command=self.actions.safe_play)
+        pv.btn_save.config(command=self.actions.save_to_archive)
+        pv.btn_delete.config(command=self.actions.remove_singer)
+        pv.btn_history.config(command=self.actions.open_history)
+        if hasattr(pv, "btn_toggle"):
+            pv.btn_toggle.config(command=self.actions.toggle_processing)
+            ToolTip(pv.btn_toggle, "Attiva/Disattiva il download automatico della coda")
+
+    def force_refresh_archive(self):
+        print("[ARCHIVIO] Refresh manuale richiesto.")
+        if hasattr(self, 'scanner') and self.scanner.current_folder:
+            self.ui.ent_search.delete(0, tk.END)
+            self.scanner.scan(self.scanner.current_folder)
+
+    def toggle_sala(self):
+        try:
+            # 1. Invertiamo lo stato logico (da True a False, o viceversa)
+            current_state = getattr(self, 'sala_active', False)
+            self.sala_active = not current_state
+            
+            # 2. Aggiorniamo la grafica del bottone in base al nuovo stato
+            if self.sala_active:
+                self.ui.btn_sala.config(bg="#28a745", text="SALA ON")
+            else:
+                self.ui.btn_sala.config(bg="#444", text="SALA OFF")
+
+            # 3. FORZATURA ASSOLUTA DI MPV (come su Windows)
+            if hasattr(self, 'player'):
+                # Prima diciamo a MPV di attivare/disattivare il fullscreen internamente
+                if hasattr(self.player, 'sala_player') and self.player.sala_player:
+                    try:
+                        self.player.sala_player.command('set', 'fullscreen', 'yes' if self.sala_active else 'no')
+                    except Exception as e: print(f"[MPV WARN] {e}")
+                
+                # Poi eseguiamo il toggle normale del player (se presente)
+                if hasattr(self.player, 'toggle_sala'):
+                    self.player.toggle_sala()
+
+        except Exception as e:
+            print(f"[SALA ERROR] Errore aggiornamento tasto: {e}")
+
+    def toggle_archive(self):
+        try:
+            left_col = self.ui.col_left
+            radio_panel = self.ui.radio_box
+            if left_col.winfo_viewable():
+                left_col.pack_forget()
+                if radio_panel: radio_panel.pack_forget()
+                self.ui.btn_toggle_archive.config(text="REPR. ARCHIVIO", bg="#5e35b1", width=16)
+            else:
+                left_col.pack(side="left", fill="y", before=self.ui.col_center)
+                if radio_panel: radio_panel.pack(side="top", fill="x", before=self.ui.v_frame, padx=5, pady=5)
+                self.ui.btn_toggle_archive.config(text="◀|▶", bg="#333", width=4)
+        except Exception as e:
+            print(f"[UI] Errore toggle archivio: {e}")
+
+    def toggle_playlist(self):
+        if self.ui.col_right.winfo_viewable():
+            self.ui.col_right.pack_forget()
+            self.ui.btn_toggle_playlist.config(text="◀")
+        else:
+            self.ui.col_right.pack(side="right", fill="y")
+            self.ui.btn_toggle_playlist.config(text="▶|◀")
+
+    def _save_session(self):
+        """Salva playlist, cronologia e sfondo, filtrando gli errori."""
+        f = os.path.expanduser("~/karaoke_clean/tmp/session.json")
+        try:
+            os.makedirs(os.path.dirname(f), exist_ok=True)
+            
+            # Recuperiamo il percorso dell'immagine attuale
+            current_bg = self.player.viz_manager.bg_image
+            
+            # --- FILTRO MAGICO ---
+            # Questa funzione dice al salvataggio cosa fare se trova oggetti strani (come Popen)
+            def skip_errors(obj):
+                return "<Processo non salvabile>" 
+            # ---------------------
+
+            with open(f, "w") as j: 
+                json.dump({
+                    "timestamp": time.time(), 
+                    "playlist": self.playlist_data,
+                    "history": self.play_history,
+                    "radio_bg_image": current_bg 
+                }, j, default=skip_errors) # <--- Qui attiviamo il filtro
+                
+        except Exception as e: 
+            # Stampa l'errore solo se è grave, ma ora Popen non lo farà più scattare
+            print(f"[INFO SALVATAGGIO] {e}")
+
+    def _load_session(self):
+        """Ripristina la sessione precedente e l'immagine di sfondo."""
+        f = os.path.expanduser("~/karaoke_clean/tmp/session.json")
+        if os.path.exists(f):
+            try:
+                with open(f, "r") as j:
+                    data = json.load(j)
+                    
+                    # 1. Ripristino Immagine Sfondo (Sempre caricata per continuità)
+                    saved_bg = data.get("radio_bg_image")
+                    if saved_bg and os.path.exists(saved_bg):
+                        self.player.viz_manager.bg_image = saved_bg
+                        print(f"[SISTEMA] Immagine sfondo radio ripristinata: {saved_bg}")
+                    
+                    # 2. Ripristino Playlist/History (Solo se recenti < 6 ore)
+                    if time.time() - data.get("timestamp", 0) < 21600:
+                        self.playlist_data.extend(data.get("playlist", []))
+                        
+                        # ORA CARICHIAMO ANCHE LA STORIA
+                        self.play_history.extend(data.get("history", [])) 
+                        
+                        self.refresh_tree()
+            except Exception as e: 
+                print(f"[ERRORE CARICAMENTO SESSIONE] {e}")
+
+    def _safe_init_mpv(self):
+        try:
+            self.root.update_idletasks()
+            
+            # Carica le scelte dalla configurazione salvata
+            saved_img = self.config.get_player_setting("radio_bg_image")
+            saved_vid_folder = self.config.get_player_setting("viz_video_folder")
+            
+            if saved_img and os.path.exists(saved_img):
+                self.player.viz_manager.bg_image = saved_img
+            if saved_vid_folder and os.path.exists(saved_vid_folder):
+                self.player.viz_manager.video_folder = saved_vid_folder
+                
+            self.player.set_window(self.ui.v_frame.winfo_id())
+            base = os.path.expanduser("~/karaoke_clean/Basi_karaoke")
+            if os.path.exists(base): self.scanner.scan(base)
+            self._update_progress_loop()
+        except: 
+            pass
+
+    def _stop_drag(self, _):
+        try: self.player.seek(self.ui.slider_var.get())
+        except: pass
+        self.is_dragging = False
+
+    def handle_archive_click_debug(self, event):
+        self.actions.handle_archive_double_click(event)
+
+    def _browse_single_file(self):
+        """Sfoglia per un SINGOLO file (Tasto Sinistro)"""
+        p = filedialog.askopenfilename(filetypes=[("Media", "*.mp3 *.mp4 *.mkv"), ("All", "*.*")])
+        if p:
+            self.ui.ent_bg_url.delete(0, tk.END); self.ui.ent_bg_url.insert(0, p)
+            self.bg_manager.load_path(p); self.bg_manager.toggle()
+
+    def _browse_bg_folder(self, event=None):
+        """Sfoglia per una CARTELLA INTERA (Tasto Destro)"""
+        p = filedialog.askdirectory()
+        if p:
+            self.ui.ent_bg_url.delete(0, tk.END)
+            self.ui.ent_bg_url.insert(0, p)
+            self.bg_manager.load_path(p)
+            self.bg_manager.toggle()
+
+    def _quick_load_bg(self):
+        p = self.ui.ent_bg_url.get().strip()
+        if not p:
+            p = filedialog.askdirectory()
+            if not p: return
+            self.ui.ent_bg_url.insert(0, p)
+        self.bg_manager.load_path(p); self.bg_manager.toggle()
+
+    def force_load_bg_folder(self, event=None):
+        """Forza la scelta di una nuova cartella per il sottofondo (Tasto Destro)."""
+        p = filedialog.askdirectory(title="Cambia Cartella Musica Sottofondo")
+        if p:
+            # Svuota la casella di testo e inserisce il nuovo percorso
+            if hasattr(self.ui, 'ent_bg_url'):
+                self.ui.ent_bg_url.delete(0, tk.END)
+                self.ui.ent_bg_url.insert(0, p)
+            
+            # Carica la nuova playlist nel manager
+            self.bg_manager.load_path(p)
+            print(f"[SISTEMA] Nuova cartella sottofondo forzata: {p}")
+            
+            # Avvia automaticamente la nuova musica
+            if getattr(self.bg_manager, 'is_playing', False):
+                self.bg_manager.play_current()
+            else:
+                self.bg_manager.toggle()
+
+    def toggle_youtube_browser(self):
+        """Versione 'Maniere Forti': Usa windowunmap (Sparizione) invece di minimize."""
+        import subprocess
+        import platform
+        import time
+
+        # 1. IDENTIFICAZIONE SISTEMA E PROCESSO
+        is_windows = platform.system() == "Windows"
+        
+        if is_windows:
+            running = subprocess.call('tasklist /FI "IMAGENAME eq smtube.exe" | findstr /I "smtube.exe"', 
+                                    shell=True, stdout=subprocess.DEVNULL) == 0
+        else:
+            running = subprocess.call(["pgrep", "-x", "smtube"], stdout=subprocess.DEVNULL) == 0
+
+        # 2. SE NON ESISTE, AVVIA
+        if not running:
+            print("[SISTEMA] Avvio SMTube...")
+            cmd = ["smtube.exe"] if is_windows else ["smtube"]
+            self.smtube_proc = subprocess.Popen(cmd)
+            self.smtube_visible = True
+            self.ui.btn_mirror.config(bg="#ff0000")
+            return
+
+        # 3. LOGICA TOGGLE
+        if is_windows:
+            # --- WINDOWS (Standard) ---
+            try:
+                import pygetwindow as gw
+                wins = gw.getWindowsWithTitle('SMTube')
+                if wins:
+                    if self.smtube_visible:
+                        wins[0].minimize()
+                        self.smtube_visible = False
+                    else:
+                        wins[0].restore()
+                        wins[0].activate()
+                        self.smtube_visible = True
+            except: pass
+        
+        else:
+            # --- LINUX MINT (Metodo UNMAP - Sparizione) ---
+            try:
+                # Trova TUTTI gli ID associati a smtube (a volte sono più di uno)
+                wid_cmd = subprocess.run(["xdotool", "search", "--class", "smtube"], 
+                                       capture_output=True, text=True)
+                wids = wid_cmd.stdout.strip().split('\n') if wid_cmd.stdout.strip() else []
+
+                if not wids:
+                    print("[ERRORE] Processo c'è, ma nessuna finestra trovata.")
+                    return
+
+                # Applica l'azione a TUTTE le finestre trovate di SMTube
+                for wid in wids:
+                    if self.smtube_visible:
+                        # AZIONE NASCONDI: windowunmap (Smetti di disegnare)
+                        subprocess.call(["xdotool", "windowunmap", wid])
+                    else:
+                        # AZIONE MOSTRA: windowmap (Disegna) + Activate (Focus)
+                        subprocess.call(["xdotool", "windowmap", wid])
+                        subprocess.call(["xdotool", "windowactivate", wid])
+                
+                # Aggiorna lo stato interno
+                if self.smtube_visible:
+                    self.smtube_visible = False
+                    print("[SISTEMA] SMTube -> SMAPPATO (Invisibile)")
+                    self.ui.btn_mirror.config(bg="#444")
+                else:
+                    self.smtube_visible = True
+                    print("[SISTEMA] SMTube -> MAPPATO (Visibile)")
+                    self.ui.btn_mirror.config(bg="#ff0000")
+
+            except Exception as e:
+                print(f"[ERRORE CRITICO] {e}")
+
+    # ==========================================================
+    # LOGICA VISUALIZER E BACKGROUND RADIO (HOT-SWAP)
+    # ==========================================================
+    def toggle_visualizer(self):
+        v = self.player.viz_manager
+        v.enabled = not v.enabled
+        
+        txt = "VIZ ON" if v.enabled else "VIZ OFF"
+        col = "#5e35b1" if v.enabled else "#444"
+        self.ui.btn_viz_toggle.config(text=txt, bg=col)
+        print(f"[SISTEMA] Visualizer {'ATTIVATO' if v.enabled else 'DISATTIVATO'}")
+        
+        # Cambia grafica IMMEDIATAMENTE, che la radio suoni o meno!
+        path = ""
+        if hasattr(self, 'bg_manager') and self.bg_manager.playlist:
+            path = self.bg_manager.playlist[0]
+        bg_file = v.get_bg_file(path, is_radio=True)
+        if bg_file:
+            self.player.change_background(bg_file)
+
+    def load_radio_image(self):
+        p = filedialog.askopenfilename(
+            title="Seleziona Immagine Sfondo Radio",
+            filetypes=[("Immagini", "*.jpg *.png *.jpeg *.webp"), ("Tutti i file", "*.*")]
+        )
+        if p:
+            self.player.viz_manager.bg_image = p
+            self.config.radio_bg_image = p
+            self.config.save()
+            print(f"[SISTEMA] Background radio salvato: {os.path.basename(p)}")
+            
+            # Mostra IMMEDIATAMENTE l'immagine se il VIZ è spento
+            if not self.player.viz_manager.enabled:
+                self.player.change_background(p)
+
+    def load_viz_video_folder(self, event=None):
+        p = filedialog.askdirectory(title="Seleziona Cartella Video Visualizer")
+        if p:
+            self.player.viz_manager.video_folder = p
+            self.config.viz_video_folder = p
+            self.config.save()
+            print(f"[SISTEMA] Cartella Video salvata: {p}")
+            
+            # Mostra IMMEDIATAMENTE il primo video se il VIZ è acceso
+            if self.player.viz_manager.enabled:
+                path = ""
+                if hasattr(self, 'bg_manager') and self.bg_manager.playlist:
+                    path = self.bg_manager.playlist[0]
+                bg_file = self.player.viz_manager.get_bg_file(path, is_radio=True)
+                if bg_file:
+                    self.player.change_background(bg_file)
+
+    # ==========================================================
+    # PATCH LAURA: SMART LOAD & PITCH (Versione Corretta)
+    # ==========================================================
+    def _smart_load_browse(self):
+        """Gestisce il caricamento intelligente: Sfoglia se vuoto, Pitch se pieno."""
+        # Usiamo il nome corretto trovato in ui_layout.py
+        entry = self.ui.ent_quick_url
+        
+        if not entry:
+            print("[ERRORE] Non trovo la barra degli indirizzi (ent_quick_url)!")
+            return
+
+        current_text = entry.get().strip()
+        
+        if not current_text:
+            # CASO 1: Casella vuota -> APRI FILE MANAGER
+            path = filedialog.askopenfilename(title="Seleziona Base Karaoke o Video")
+            if path:
+                # Pulisce e inserisce il nuovo percorso (FIX SOVRASCRITTURA)
+                entry.delete(0, tk.END)
+                entry.insert(0, path)
+        else:
+            # CASO 2: C'è scritto qualcosa -> APRI POPUP PITCH
+            self._open_pitch_popup(current_text)
+
+    def _open_pitch_popup(self, source):
+        """Apre il popup per scegliere la tonalità."""
+        popup = tk.Toplevel(self.root)
+        popup.title("Tonalità")
+        popup.geometry("300x200")
+        popup.config(bg="#333")
+        try: # Centra la finestra
+            x = self.root.winfo_x() + (self.root.winfo_width() // 2) - 150
+            y = self.root.winfo_y() + (self.root.winfo_height() // 2) - 100
+            popup.geometry(f"+{x}+{y}")
+        except: pass
+
+        tk.Label(popup, text="Scegli Tonalità (Pitch)", bg="#333", fg="white", font=("Arial", 11)).pack(pady=10)
+        
+        pitch_val = tk.IntVar(value=0)
+        tk.Scale(popup, from_=-12, to=12, orient=tk.HORIZONTAL, variable=pitch_val, 
+                 bg="#333", fg="white", length=200, tickinterval=4).pack()
+        
+        def play(paused=False):
+            p = pitch_val.get()
+            popup.destroy()
+            print(f"[GUI] Play: {source} | Pitch: {p}")
+            self.player.load_media(source, pitch=p, start_paused=paused, is_radio=False)
+            
+            # --- MODIFICA: Pulisce la barra DOPO aver caricato ---
+            if hasattr(self.ui, 'ent_quick_url'):
+                self.ui.ent_quick_url.delete(0, tk.END)
+            # ----------------------------------------------------
+
+        tk.Button(popup, text="▶ AVVIA", bg="green", fg="white", command=lambda: play(False)).pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5, pady=10)
+        tk.Button(popup, text="⏸ IN PAUSA", bg="orange", fg="black", command=lambda: play(True)).pack(side=tk.LEFT, fill=tk.X, expand=True, padx=5, pady=10)

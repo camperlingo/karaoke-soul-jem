@@ -1,0 +1,15 @@
+setup.py
+karaoke_b3/__init__.py
+karaoke_b3/__main__.py
+karaoke_b3/main.py
+karaoke_b3.egg-info/PKG-INFO
+karaoke_b3.egg-info/SOURCES.txt
+karaoke_b3.egg-info/dependency_links.txt
+karaoke_b3.egg-info/entry_points.txt
+karaoke_b3.egg-info/requires.txt
+karaoke_b3.egg-info/top_level.txt
+karaoke_b3/core/__init__.py
+karaoke_b3/core/config.py
+karaoke_b3/gui/__init__.py
+karaoke_b3/gui/main_window.py
+karaoke_b3/scripts/__init__.py

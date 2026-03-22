@@ -1,0 +1,2 @@
+python-mpv>=1.0.0
+PyGObject>=3.36.0

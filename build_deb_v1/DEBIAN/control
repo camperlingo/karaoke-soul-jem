@@ -1,0 +1,7 @@
+Package: souljem-karaoke
+Version: 1.0
+Section: utils
+Priority: optional
+Architecture: amd64
+Maintainer: camperlingo
+Description: SoulJem Karaoke Pro - Versione Legacy 1.0 (Python)

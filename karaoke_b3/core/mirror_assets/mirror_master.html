@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>MASTER - CONSOLE OPERATORE</title>
+    <style>
+        body { margin: 0; background: #111; color: white; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        .toolbar { background: #1e1e1e; padding: 10px; border-bottom: 2px solid #007acc; display: flex; gap: 10px; z-index: 100; }
+        input { flex-grow: 1; padding: 12px; background: #000; color: #0f0; border: 1px solid #444; font-size: 18px; outline: none; }
+        button { padding: 10px 15px; background: #007acc; color: white; border: none; cursor: pointer; font-weight: bold; border-radius: 5px; }
+        #view { flex-grow: 1; border: none; background: white; }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <input type="text" id="q" placeholder="Cerca karaoke..." onkeypress="if(event.key==='Enter') doSearch()">
+        <button onclick="doSearch()">CERCA</button>
+        <button onclick="sendScroll(-200)">▲ SU</button>
+        <button onclick="sendScroll(200)">▼ GIÙ</button>
+    </div>
+    <iframe id="view" src="about:blank"></iframe>
+    <script>
+        const ws = new WebSocket(`ws://${location.host}/ws`);
+        function doSearch() {
+            let val = document.getElementById("q").value.trim();
+            let url = `https://www.youtube.com/results?search_query=${encodeURIComponent(val + " karaoke")}`;
+            document.getElementById("view").src = url;
+            ws.send(JSON.stringify({ type: "navigate", url: url }));
+        }
+        function sendScroll(v) { ws.send(JSON.stringify({ type: "scroll", value: v })); }
+        window.addEventListener('keydown', (e) => {
+            if (e.key === "ArrowDown") sendScroll(150);
+            if (e.key === "ArrowUp") sendScroll(-150);
+        });
+    </script>
+</body>
+</html>

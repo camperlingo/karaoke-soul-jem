@@ -1,0 +1,748 @@
+2025-12-04 14:25:57 [INFO] MIDI input trovato: Midi Through:Midi Through Port-0 14:0
+2025-12-04 14:25:57 [INFO] Porta MIDI aperta: Midi Through:Midi Through Port-0 14:0
+2025-12-04 14:25:57 [INFO] Connesso a Mixxx 127.0.0.1:8000
+2025-12-04 14:26:56 [ERROR] File video non trovato: None
+2025-12-04 14:26:56 [INFO] Connesso a Mixxx 127.0.0.1:8000
+2025-12-04 14:26:59 [ERROR] File video non trovato: None
+2025-12-04 14:26:59 [INFO] Connesso a Mixxx 127.0.0.1:8000
+2025-12-04 14:35:26 [INFO] MIDI input trovato: Midi Through:Midi Through Port-0 14:0
+2025-12-04 14:35:26 [INFO] Porta MIDI aperta: Midi Through:Midi Through Port-0 14:0
+2025-12-04 14:35:26 [INFO] Connesso a Mixxx 127.0.0.1:8000
+2025-12-04 14:44:14 [ERROR] File video non trovato: None
+2025-12-04 14:44:14 [INFO] Connesso a Mixxx 127.0.0.1:8000
+2025-12-04 15:06:49 [INFO] Avvio MainGUI...
+2025-12-04 15:06:49 [INFO] Avviato mpv (idle) pid=9432 socket=/tmp/mpv_main.sock
+2025-12-04 15:06:50 [DEBUG] Socket mpv trovata.
+2025-12-04 15:06:50 [INFO] mpv_mirror start_idle -> True
+2025-12-04 15:06:50 [INFO] MainGUI avviata
+2025-12-04 15:06:50 [INFO] Avviato mpv embedded pid=9439 wid=54525959 socket=/tmp/mpv_preview.sock
+2025-12-04 15:06:50 [DEBUG] Socket mpv (embedded) trovata.
+2025-12-04 15:06:50 [INFO] mpv_preview start_embedded -> True
+2025-12-04 15:26:01 [INFO] MPV terminato
+2025-12-04 15:26:01 [INFO] MPV terminato
+2025-12-04 15:39:50 [INFO] Avvio MainGUI...
+2025-12-04 15:39:50 [INFO] Avviato mpv (idle) pid=10008 socket=/tmp/mpv_main.sock
+2025-12-04 15:39:50 [DEBUG] Socket mpv trovata.
+2025-12-04 15:39:50 [INFO] MainGUI avviata
+2025-12-04 15:39:50 [INFO] Avviato mpv embedded pid=10009 wid=54525963 socket=/tmp/mpv_preview.sock
+2025-12-04 15:39:50 [DEBUG] Socket mpv (embedded) trovata.
+2025-12-04 15:42:12 [INFO] Avvio MainGUI...
+2025-12-04 15:42:12 [INFO] Avviato mpv (idle) pid=10050 socket=/tmp/mpv_main.sock
+2025-12-04 15:42:12 [DEBUG] Socket mpv trovata.
+2025-12-04 15:42:13 [INFO] MainGUI avviata
+2025-12-04 15:42:13 [INFO] Avviato mpv embedded pid=10051 wid=54525963 socket=/tmp/mpv_preview.sock
+2025-12-04 15:42:13 [DEBUG] Socket mpv (embedded) trovata.
+2025-12-04 15:42:24 [DEBUG] send_command: set_property ['volume', 49]
+2025-12-04 15:42:24 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:24 [DEBUG] send_command: set_property ['volume', 48]
+2025-12-04 15:42:24 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:24 [DEBUG] send_command: set_property ['volume', 47]
+2025-12-04 15:42:24 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:24 [DEBUG] send_command: set_property ['volume', 46]
+2025-12-04 15:42:24 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:24 [DEBUG] send_command: set_property ['volume', 45]
+2025-12-04 15:42:24 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:24 [DEBUG] send_command: set_property ['volume', 44]
+2025-12-04 15:42:24 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 43]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 42]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 39]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 37]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 33]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 30]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 26]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 20]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 16]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 13]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 10]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 8]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 6]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 5]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:25 [DEBUG] send_command: set_property ['volume', 4]
+2025-12-04 15:42:25 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 3]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 0]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 1]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 7]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 12]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 18]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 24]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 26]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 28]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 36]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 39]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 42]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 45]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 46]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:26 [DEBUG] send_command: set_property ['volume', 47]
+2025-12-04 15:42:26 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:27 [DEBUG] send_command: set_property ['volume', 48]
+2025-12-04 15:42:27 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:27 [DEBUG] send_command: set_property ['volume', 49]
+2025-12-04 15:42:27 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:42:28 [DEBUG] send_command: set_property ['volume', 50]
+2025-12-04 15:42:28 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:12 [DEBUG] send_command: set_property ['speed', 0.99]
+2025-12-04 15:43:12 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:12 [DEBUG] send_command: set_property ['speed', 1.0]
+2025-12-04 15:43:12 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:12 [DEBUG] send_command: set_property ['speed', 0.99]
+2025-12-04 15:43:12 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:12 [DEBUG] send_command: set_property ['speed', 0.98]
+2025-12-04 15:43:12 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:12 [DEBUG] send_command: set_property ['speed', 0.97]
+2025-12-04 15:43:12 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:12 [DEBUG] send_command: set_property ['speed', 0.96]
+2025-12-04 15:43:12 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:12 [DEBUG] send_command: set_property ['speed', 0.95]
+2025-12-04 15:43:12 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:12 [DEBUG] send_command: set_property ['speed', 0.94]
+2025-12-04 15:43:12 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:13 [DEBUG] send_command: set_property ['speed', 0.9299999999999999]
+2025-12-04 15:43:13 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:13 [DEBUG] send_command: set_property ['speed', 0.92]
+2025-12-04 15:43:13 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:13 [DEBUG] send_command: set_property ['speed', 0.91]
+2025-12-04 15:43:13 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:13 [DEBUG] send_command: set_property ['speed', 0.9]
+2025-12-04 15:43:13 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:13 [DEBUG] send_command: set_property ['speed', 0.89]
+2025-12-04 15:43:13 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:13 [DEBUG] send_command: set_property ['speed', 0.88]
+2025-12-04 15:43:13 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:13 [DEBUG] send_command: set_property ['speed', 0.87]
+2025-12-04 15:43:13 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.86]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.85]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.84]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.83]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.8200000000000001]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.81]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.8]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.79]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.78]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.76]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.74]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.73]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.72]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:14 [DEBUG] send_command: set_property ['speed', 0.7]
+2025-12-04 15:43:14 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.69]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.65]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.6]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.56]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.55]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.51]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.49]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.45999999999999996]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.4]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.31999999999999995]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.25]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.19999999999999996]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.12]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.07999999999999996]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.06000000000000005]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.030000000000000027]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:15 [DEBUG] send_command: set_property ['speed', 0.0]
+2025-12-04 15:43:15 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:18 [DEBUG] send_command: set_property ['speed', 0.010000000000000009]
+2025-12-04 15:43:18 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:18 [DEBUG] send_command: set_property ['speed', 0.07999999999999996]
+2025-12-04 15:43:18 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:18 [DEBUG] send_command: set_property ['speed', 0.14]
+2025-12-04 15:43:18 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:18 [DEBUG] send_command: set_property ['speed', 0.18000000000000005]
+2025-12-04 15:43:18 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:18 [DEBUG] send_command: set_property ['speed', 0.28]
+2025-12-04 15:43:18 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:18 [DEBUG] send_command: set_property ['speed', 0.33999999999999997]
+2025-12-04 15:43:18 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:18 [DEBUG] send_command: set_property ['speed', 0.43000000000000005]
+2025-12-04 15:43:18 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:18 [DEBUG] send_command: set_property ['speed', 0.52]
+2025-12-04 15:43:18 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:18 [DEBUG] send_command: set_property ['speed', 0.62]
+2025-12-04 15:43:18 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:18 [DEBUG] send_command: set_property ['speed', 0.71]
+2025-12-04 15:43:18 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.78]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.8]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.8200000000000001]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.83]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.84]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.85]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.86]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.87]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.88]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.89]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.9]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.91]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.92]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:19 [DEBUG] send_command: set_property ['speed', 0.9299999999999999]
+2025-12-04 15:43:19 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:20 [DEBUG] send_command: set_property ['speed', 0.94]
+2025-12-04 15:43:20 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:20 [DEBUG] send_command: set_property ['speed', 0.95]
+2025-12-04 15:43:20 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:20 [DEBUG] send_command: set_property ['speed', 0.96]
+2025-12-04 15:43:20 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:20 [DEBUG] send_command: set_property ['speed', 0.97]
+2025-12-04 15:43:20 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:21 [DEBUG] send_command: set_property ['speed', 0.98]
+2025-12-04 15:43:21 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:21 [DEBUG] send_command: set_property ['speed', 0.99]
+2025-12-04 15:43:21 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:21 [DEBUG] send_command: set_property ['speed', 1.0]
+2025-12-04 15:43:21 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:22 [DEBUG] send_command: set_property ['speed', 1.01]
+2025-12-04 15:43:22 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:22 [DEBUG] send_command: set_property ['speed', 1.02]
+2025-12-04 15:43:22 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:23 [DEBUG] send_command: set_property ['speed', 1.01]
+2025-12-04 15:43:23 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 15:43:24 [DEBUG] send_command: set_property ['speed', 1.0]
+2025-12-04 15:43:24 [ERROR] Errore invio comando mpv: [Errno 111] Connessione rifiutata
+2025-12-04 16:09:04 [INFO] MPV terminato
+2025-12-04 16:09:04 [INFO] MPV terminato
+2025-12-04 16:40:25 [INFO] Avvio MainGUI...
+2025-12-04 16:43:11 [INFO] Avvio MainGUI...
+2025-12-04 16:43:12 [INFO] Avviato mpv (idle) pid=11044 socket=/tmp/mpv_main.sock
+2025-12-04 16:43:12 [DEBUG] Socket mpv trovata
+2025-12-04 16:43:12 [INFO] MainGUI avviata
+2025-12-04 16:43:12 [INFO] Avviato mpv embedded pid=11045 wid=54525963 socket=/tmp/mpv_preview.sock
+2025-12-04 16:43:12 [DEBUG] Socket mpv (embedded) trovata
+2025-12-04 16:43:56 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:43:56 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:43:57 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:43:57 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:43:58 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:43:58 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:43:58 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:43:59 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:43:59 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:00 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:01 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:01 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:02 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:02 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:02 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:03 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:03 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:03 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:04 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:04 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:05 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:05 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:05 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:06 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:06 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:06 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:07 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:10 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:11 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:11 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:12 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:12 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:12 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:12 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:13 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:13 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:13 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:14 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:14 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:14 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:15 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:15 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:15 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:16 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:16 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:16 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:17 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:17 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:17 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:17 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:18 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:18 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:18 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:19 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:19 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:19 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:20 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:20 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:20 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:21 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:21 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:21 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:22 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:22 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:22 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:22 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:23 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:23 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:23 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:24 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:24 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:24 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:25 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:25 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:25 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:26 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:26 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:26 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:27 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:27 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:27 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:29 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:30 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:30 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:30 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:32 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:32 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:32 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:33 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:33 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:34 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:34 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:34 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:35 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:35 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:35 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:36 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:38 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:39 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:39 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:39 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:40 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:41 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:41 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:41 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:42 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:42 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:43 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:43 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:43 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:44 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:46 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:46 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:48 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:49 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:49 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:50 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:50 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:50 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:51 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:52 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:55 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:55 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:56 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:56 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:57 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:57 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:58 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:58 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:44:59 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:45:01 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:59:00 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:59:01 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:59:01 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:59:01 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:59:02 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 16:59:02 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:12:01 [INFO] mpv process terminated
+2025-12-04 17:12:01 [INFO] mpv process terminated
+2025-12-04 17:28:40 [INFO] Avvio MainGUI...
+2025-12-04 17:33:21 [INFO] Avvio MainGUI...
+2025-12-04 17:33:21 [INFO] Avviato mpv (idle) pid=12908 socket=/tmp/mpv_main.sock
+2025-12-04 17:33:21 [DEBUG] Socket mpv trovata
+2025-12-04 17:33:21 [INFO] MainGUI avviata
+2025-12-04 17:33:21 [INFO] Avviato mpv embedded pid=12909 wid=54525963 socket=/tmp/mpv_preview.sock
+2025-12-04 17:33:21 [DEBUG] Socket mpv (embedded) trovata
+2025-12-04 17:34:23 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:23 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:24 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:24 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:24 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:25 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:25 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:25 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:27 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:27 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:27 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:28 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:29 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:29 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:30 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:30 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:30 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:32 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:32 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:33 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:33 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:33 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:34 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:39 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:39 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:40 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:41 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:42 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:42 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:42 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:43 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:43 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:43 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:44 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:44 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:44 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:44 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:45 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:45 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:46 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:46 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:47 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:47 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:48 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:48 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:48 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:48 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:49 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:49 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:50 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:50 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:50 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:51 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:51 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:51 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:52 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:52 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:52 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:53 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:53 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:53 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:54 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:55 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:55 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:56 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:56 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:57 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:57 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:57 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:58 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:34:58 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:01 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:02 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:02 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:02 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:03 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:03 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:03 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:04 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:04 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:04 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:04 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:05 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:05 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:05 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:06 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:06 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:06 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:07 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:07 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:07 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:08 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:08 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:08 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:09 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:09 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:09 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:10 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:10 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:10 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:11 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:12 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:12 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:12 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:13 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:13 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:13 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:16 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:17 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:17 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:17 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:18 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:35:18 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 17:42:33 [INFO] mpv process terminated
+2025-12-04 17:42:33 [INFO] mpv process terminated
+2025-12-04 17:42:49 [INFO] Avvio MainGUI...
+2025-12-04 17:42:50 [INFO] Avviato mpv (idle) pid=13234 socket=/tmp/mpv_main.sock
+2025-12-04 17:42:50 [DEBUG] Socket mpv trovata
+2025-12-04 17:42:50 [INFO] MainGUI avviata
+2025-12-04 17:42:50 [INFO] Avviato mpv embedded pid=13235 wid=54525967 socket=/tmp/mpv_preview.sock
+2025-12-04 17:42:50 [DEBUG] Socket mpv (embedded) trovata
+2025-12-04 17:50:28 [INFO] mpv process terminated
+2025-12-04 17:50:28 [INFO] mpv process terminated
+2025-12-04 17:52:43 [INFO] Avvio MainGUI...
+2025-12-04 17:52:43 [INFO] Avviato mpv (idle) pid=13508 socket=/tmp/mpv_main.sock
+2025-12-04 17:52:43 [DEBUG] Socket mpv trovata
+2025-12-04 17:52:43 [INFO] MainGUI avviata
+2025-12-04 17:52:43 [INFO] Avviato mpv embedded pid=13509 wid=54525963 socket=/tmp/mpv_preview.sock
+2025-12-04 17:52:43 [DEBUG] Socket mpv (embedded) trovata
+2025-12-04 17:59:11 [INFO] mpv process terminated
+2025-12-04 17:59:11 [INFO] mpv process terminated
+2025-12-04 18:00:28 [INFO] Avvio MainGUI...
+2025-12-04 18:00:29 [INFO] Avviato mpv (idle) pid=13735 socket=/tmp/mpv_main.sock
+2025-12-04 18:00:29 [DEBUG] Socket mpv trovata
+2025-12-04 18:00:29 [INFO] MainGUI avviata
+2025-12-04 18:00:29 [INFO] Avviato mpv embedded pid=13736 wid=54525963 socket=/tmp/mpv_preview.sock
+2025-12-04 18:00:29 [DEBUG] Socket mpv (embedded) trovata
+2025-12-04 18:04:56 [INFO] mpv process terminated
+2025-12-04 18:04:56 [INFO] mpv process terminated
+2025-12-04 18:25:51 [INFO] Avvio MainGUI...
+2025-12-04 18:25:52 [INFO] Avviato mpv (idle) pid=14185 socket=/tmp/mpv_main.sock
+2025-12-04 18:25:52 [DEBUG] Socket mpv trovata
+2025-12-04 18:25:52 [INFO] MainGUI avviata
+2025-12-04 18:25:52 [INFO] Avviato mpv embedded pid=14186 wid=54525963 socket=/tmp/mpv_preview.sock
+2025-12-04 18:25:52 [DEBUG] Socket mpv (embedded) trovata
+2025-12-04 19:09:55 [INFO] mpv process terminated
+2025-12-04 19:09:55 [INFO] mpv process terminated
+2025-12-04 19:48:03 [INFO] Avvio MainGUI...
+2025-12-04 19:48:04 [INFO] Avviato mpv (idle) pid=15783 socket=/tmp/mpv_main.sock
+2025-12-04 19:48:04 [DEBUG] Socket mpv trovata
+2025-12-04 19:48:04 [INFO] MainGUI avviata
+2025-12-04 19:48:04 [INFO] Avviato mpv embedded pid=15784 wid=37748747 socket=/tmp/mpv_preview.sock
+2025-12-04 19:48:04 [DEBUG] Socket mpv (embedded) trovata
+2025-12-04 19:54:14 [ERROR] load_file: path vuoto
+2025-12-04 19:54:14 [ERROR] load_file: path vuoto
+2025-12-04 19:54:14 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:07 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:07 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:09 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:09 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:11 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:16 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:17 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:26 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:26 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:27 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:28 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:28 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:28 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:29 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:29 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:29 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:29 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:30 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:30 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:32 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:32 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:42 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:42 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:47 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:48 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:03:54 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 20:17:16 [INFO] mpv process terminated
+2025-12-04 20:17:16 [INFO] mpv process terminated
+2025-12-04 20:17:21 [INFO] Avvio MainGUI...
+2025-12-04 20:17:21 [INFO] Avviato mpv (idle) pid=16796 socket=/tmp/mpv_main.sock
+2025-12-04 20:17:21 [DEBUG] Socket mpv trovata
+2025-12-04 20:17:21 [INFO] MainGUI avviata
+2025-12-04 20:17:21 [INFO] Avviato mpv embedded pid=16797 wid=37748747 socket=/tmp/mpv_preview.sock
+2025-12-04 20:17:21 [DEBUG] Socket mpv (embedded) trovata
+2025-12-04 20:32:38 [INFO] mpv process terminated
+2025-12-04 20:32:38 [INFO] mpv process terminated
+2025-12-04 21:07:22 [INFO] Avvio MainGUI...
+2025-12-04 21:07:23 [INFO] Avviato mpv (idle) pid=18414 socket=/tmp/mpv_main.sock
+2025-12-04 21:07:23 [DEBUG] Socket mpv trovata
+2025-12-04 21:07:23 [INFO] MainGUI avviata
+2025-12-04 21:07:23 [INFO] Avviato mpv embedded pid=18415 wid=37748747 socket=/tmp/mpv_preview.sock
+2025-12-04 21:07:23 [DEBUG] Socket mpv (embedded) trovata
+2025-12-04 21:09:28 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:09:29 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:09:29 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['https://youtu.be/UqR9fuZpCdA?si=rKD5RrzpWPI-OpHA']
+2025-12-04 21:09:29 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:09:29 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:09:29 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:09:29 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['https://youtu.be/UqR9fuZpCdA?si=rKD5RrzpWPI-OpHA']
+2025-12-04 21:09:29 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:09:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:09:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:09:31 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['https://youtu.be/UqR9fuZpCdA?si=rKD5RrzpWPI-OpHA']
+2025-12-04 21:09:31 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:09:37 [ERROR] load_file: path vuoto
+2025-12-04 21:09:37 [ERROR] load_file: path vuoto
+2025-12-04 21:09:37 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:09:37 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['']
+2025-12-04 21:09:37 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:09:38 [ERROR] load_file: path vuoto
+2025-12-04 21:09:38 [ERROR] load_file: path vuoto
+2025-12-04 21:09:39 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:09:39 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['']
+2025-12-04 21:09:39 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:09:42 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:09:42 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:09:42 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['https://youtu.be/UqR9fuZpCdA?si=rKD5RrzpWPI-OpHA']
+2025-12-04 21:09:42 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:10:03 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:10:03 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:10:03 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['https://youtu.be/UqR9fuZpCdA?si=rKD5RrzpWPI-OpHA']
+2025-12-04 21:10:03 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:10:30 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:10:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:10:31 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['/home/laura/Scaricati/videoplayback.mp4']
+2025-12-04 21:10:31 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:14:25 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:26 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:26 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:26 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:27 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:27 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['/home/laura/Scaricati/videoplayback.mp4']
+2025-12-04 21:14:27 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:14:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:32 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:32 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['/home/laura/Scaricati/videoplayback.mp4']
+2025-12-04 21:14:32 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:14:38 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:38 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:38 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:39 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:39 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:14:39 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['/home/laura/Scaricati/videoplayback.mp4']
+2025-12-04 21:14:39 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:17:30 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:30 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:31 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:31 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['/home/laura/Scaricati/videoplayback.mp4']
+2025-12-04 21:17:31 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:17:38 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:38 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:39 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:39 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:39 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:39 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['/home/laura/Scaricati/videoplayback.mp4']
+2025-12-04 21:17:39 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:17:41 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:41 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:42 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:42 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:42 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-04 21:17:42 [DEBUG] OSC sent /mixxx/load -> 127.0.0.1:8000 args=['/home/laura/Scaricati/videoplayback.mp4']
+2025-12-04 21:17:42 [DEBUG] OSC sent /mixxx/play -> 127.0.0.1:8000 args=['1']
+2025-12-04 21:36:37 [INFO] mpv process terminated
+2025-12-04 21:36:37 [INFO] mpv process terminated
+2025-12-04 22:11:22 [INFO] Avvio MainGUI...
+2025-12-04 22:11:22 [INFO] Avviato mpv (idle) pid=20081 socket=/tmp/mpv_main.sock
+2025-12-04 22:11:22 [DEBUG] Socket mpv trovata
+2025-12-04 22:11:22 [INFO] MainGUI avviata
+2025-12-04 22:11:22 [INFO] Avviato mpv embedded pid=20082 wid=37748747 socket=/tmp/mpv_preview.sock
+2025-12-04 22:11:22 [DEBUG] Socket mpv (embedded) trovata
+2025-12-04 22:28:56 [INFO] mpv process terminated
+2025-12-04 22:28:56 [INFO] mpv process terminated
+2025-12-04 22:29:03 [INFO] Avvio MainGUI...
+2025-12-04 22:42:19 [INFO] MIDI input trovato: Midi Through:Midi Through Port-0 14:0
+2025-12-04 22:42:19 [INFO] Porta MIDI aperta: Midi Through:Midi Through Port-0 14:0
+2025-12-04 22:42:19 [INFO] Connesso a Mixxx 127.0.0.1:8000
+2025-12-05 13:46:49 [INFO] MIDI input trovato: Midi Through:Midi Through Port-0 14:0
+2025-12-05 13:46:49 [INFO] Porta MIDI aperta: Midi Through:Midi Through Port-0 14:0
+2025-12-05 13:46:49 [INFO] Connesso a Mixxx 127.0.0.1:8000
+2025-12-05 13:53:10 [INFO] MIDI input trovato: Midi Through:Midi Through Port-0 14:0
+2025-12-05 13:53:10 [INFO] Porta MIDI aperta: Midi Through:Midi Through Port-0 14:0
+2025-12-05 13:53:10 [INFO] Connesso a Mixxx 127.0.0.1:8000
+2025-12-05 13:53:11 [INFO] Avviato mpv embedded pid=6342 wid=81788939 socket=/tmp/mpv_main.sock
+2025-12-05 13:53:12 [DEBUG] Socket mpv (embedded) trovata
+2025-12-05 13:53:24 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-05 13:53:24 [INFO] Comando inviato a Mixxx: /deck1/pitch 0
+2025-12-05 13:53:24 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-05 13:53:24 [INFO] Comando inviato a Mixxx: /deck1/pitch -1
+2025-12-05 13:53:24 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-05 13:53:24 [INFO] Comando inviato a Mixxx: /deck1/pitch -2
+2025-12-05 13:53:25 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-05 13:53:25 [INFO] Comando inviato a Mixxx: /deck1/pitch -3
+2025-12-05 13:53:25 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-05 13:53:25 [INFO] Comando inviato a Mixxx: /deck1/pitch -1
+2025-12-05 13:53:25 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-05 13:53:25 [INFO] Comando inviato a Mixxx: /deck1/pitch 0
+2025-12-05 13:53:26 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-05 13:53:26 [INFO] Comando inviato a Mixxx: /deck1/pitch 0
+2025-12-05 13:53:26 [ERROR] Errore invio comando mpv dopo 6 tentativi: [Errno 111] Connessione rifiutata
+2025-12-05 13:53:26 [INFO] Comando inviato a Mixxx: /deck1/pitch 0

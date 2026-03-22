@@ -1,0 +1,9 @@
+{
+    "paths": {
+        "karaoke_root": "/home/laura/karaoke_clean/Basi_karaoke",
+        "radio_root": "/home/laura/karaoke_clean/MP3_DOWNLOADS"
+    },
+    "audio": {
+        "turbo_pitch": false
+    }
+}
